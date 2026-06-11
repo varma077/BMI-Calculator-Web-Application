@@ -5,98 +5,226 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BMI Calculator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Theme Toggle -->
-  <button class="theme-btn" id="themeBtn" title="Toggle theme">
-    <span class="theme-icon" id="themeIcon">☀</span>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   </button>
 
   <div class="page">
 
-    <!-- Hero -->
-    <div class="hero">
-      <p class="hero-eyebrow">Know your numbers</p>
-      <h1 class="hero-title">BMI Calculator</h1>
-      <p class="hero-sub">Body Mass Index · Metric (kg & cm)</p>
-    </div>
-
-    <!-- Card -->
-    <div class="card">
-
-      <!-- Inputs -->
-      <div class="inputs">
-        <div class="field">
-          <label for="weight">Weight</label>
-          <div class="input-wrap">
-            <input id="weight" type="number" placeholder="70" min="1" max="300" step="0.1" />
-            <span class="unit">kg</span>
-          </div>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-        <div class="field">
-          <label for="height">Height</label>
-          <div class="input-wrap">
-            <input id="height" type="number" placeholder="175" min="1" max="300" step="0.1" />
-            <span class="unit">cm</span>
-          </div>
-        </div>
+        <span class="logo-text">HealthCheck</span>
       </div>
+      <div class="header-center">
+        <h1 class="page-title">BMI <span class="accent">Calculator</span></h1>
+        <p class="page-sub">Body Mass Index · Metric (kg & cm)</p>
+      </div>
+      <div class="header-right">
+        <div class="header-tag">WHO Standard</div>
+      </div>
+    </header>
 
-      <button class="calc-btn" id="calcBtn">Calculate BMI</button>
-      <p class="error-msg" id="errorMsg"></p>
+    <!-- ROW 1: Step 1 + Step 2 side by side -->
+    <div class="top-row">
 
-      <!-- Result (hidden until calculated) -->
-      <div class="result" id="result">
-
-        <div class="bmi-display">
-          <span class="bmi-label">Your BMI</span>
-          <span class="bmi-value" id="bmiValue">—</span>
-          <span class="bmi-category" id="bmiCategory"></span>
+      <!-- STEP 1: Input -->
+      <div class="card input-card">
+        <div class="card-header">
+          <span class="card-title">Your Details</span>
+          <span class="card-badge">Step 1</span>
         </div>
 
-        <!-- BMI Scale Bar -->
-        <div class="scale-wrap">
+        <div class="field">
+          <label class="field-label">Gender</label>
+          <div class="gender-group">
+            <button class="gender-btn active" data-gender="male" aria-pressed="true">
+              <span class="gender-symbol">♂</span><span>Male</span>
+            </button>
+            <button class="gender-btn" data-gender="female" aria-pressed="false">
+              <span class="gender-symbol">♀</span><span>Female</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="age">Age</label>
+          <div class="input-row">
+            <input id="age" type="number" class="inp" placeholder="Enter your age" min="1" max="120" />
+            <div class="unit-pill">yrs</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="weight">Weight</label>
+          <div class="input-row">
+            <input id="weight" type="number" class="inp" placeholder="Enter your weight" min="1" max="300" step="0.1" />
+            <div class="unit-pill">kg</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="height">Height</label>
+          <div class="input-row">
+            <input id="height" type="number" class="inp" placeholder="Enter your height" min="50" max="300" step="0.1" />
+            <div class="unit-pill">cm</div>
+          </div>
+        </div>
+
+        <button class="calc-btn" id="calcBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Calculate BMI
+        </button>
+        <p class="error-msg" id="errorMsg"></p>
+
+        <!-- Scale Reference -->
+        <div class="scale-ref">
+          <p class="scale-ref-title">Reference Scale</p>
           <div class="scale-bar">
-            <div class="scale-segment s-under">Underweight<br/>&lt;18.5</div>
-            <div class="scale-segment s-normal">Normal<br/>18.5–24.9</div>
-            <div class="scale-segment s-over">Overweight<br/>25–29.9</div>
-            <div class="scale-segment s-obese">Obese<br/>≥30</div>
+            <div class="scale-fill fill-under"  style="width:25%"></div>
+            <div class="scale-fill fill-normal" style="width:25%"></div>
+            <div class="scale-fill fill-over"   style="width:25%"></div>
+            <div class="scale-fill fill-obese"  style="width:25%"></div>
           </div>
-          <div class="scale-pointer" id="scalePointer"></div>
-        </div>
-
-        <!-- Info Row -->
-        <div class="info-grid">
-          <div class="info-box">
-            <p class="info-label">Ideal Weight Range</p>
-            <p class="info-value" id="idealRange">—</p>
+          <div class="scale-labels">
+            <span>&lt;18.5</span><span>24.9</span><span>29.9</span><span>30+</span>
           </div>
-          <div class="info-box">
-            <p class="info-label">Health Tip</p>
-            <p class="info-value tip" id="healthTip">—</p>
+          <div class="scale-legend">
+            <span class="legend-item"><i class="dot" style="background:var(--c-under)"></i>Underweight</span>
+            <span class="legend-item"><i class="dot" style="background:var(--c-normal)"></i>Normal</span>
+            <span class="legend-item"><i class="dot" style="background:var(--c-over)"></i>Overweight</span>
+            <span class="legend-item"><i class="dot" style="background:var(--c-obese)"></i>Obese</span>
           </div>
         </div>
+      </div><!-- /step1 -->
 
-      </div><!-- /result -->
+      <!-- STEP 2: Result -->
+      <div class="card result-card" id="resultCard">
 
-    </div><!-- /card -->
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-ring">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="28" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 4"/>
+              <circle cx="32" cy="32" r="14" stroke="var(--border)" stroke-width="2"/>
+              <line x1="32" y1="18" x2="32" y2="32" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="32" cy="32" r="3" fill="var(--muted)"/>
+            </svg>
+          </div>
+          <p class="empty-title">Ready to Calculate</p>
+          <p class="empty-sub">Fill in your details on the left<br/>and hit Calculate BMI</p>
+        </div>
 
-    <!-- BMI Reference Table -->
-    <div class="ref-table">
-      <p class="ref-title">BMI Categories</p>
-      <div class="ref-rows">
-        <div class="ref-row"><span class="dot under"></span><span>Underweight</span><span class="ref-range">&lt; 18.5</span></div>
-        <div class="ref-row"><span class="dot normal"></span><span>Normal weight</span><span class="ref-range">18.5 – 24.9</span></div>
-        <div class="ref-row"><span class="dot over"></span><span>Overweight</span><span class="ref-range">25 – 29.9</span></div>
-        <div class="ref-row"><span class="dot obese"></span><span>Obese</span><span class="ref-range">≥ 30</span></div>
+        <!-- Result content -->
+        <div class="result-body" id="resultContent">
+          <div class="card-header">
+            <span class="card-title">Your Result</span>
+            <span class="card-badge" id="resultBadge">Step 2</span>
+          </div>
+
+          <!-- BMI number above gauge -->
+          <div class="gauge-readout">
+            <span class="bmi-big" id="bmiNumber">--</span>
+            <span class="bmi-label-text">BMI Score</span>
+          </div>
+
+          <!-- Gauge -->
+          <div class="gauge-section">
+            <svg class="gauge-svg" viewBox="0 0 260 140" aria-hidden="true">
+              <path d="M 20 130 A 110 110 0 0 1 240 130" fill="none" stroke="var(--border)" stroke-width="16" stroke-linecap="round"/>
+              <path class="gseg g-under"  d="M 20 130 A 110 110 0 0 1 73 34"   fill="none" stroke-width="16" stroke-linecap="round"/>
+              <path class="gseg g-normal" d="M 73 34  A 110 110 0 0 1 187 34"  fill="none" stroke-width="16" stroke-linecap="round"/>
+              <path class="gseg g-over"   d="M 187 34 A 110 110 0 0 1 216 72"  fill="none" stroke-width="16" stroke-linecap="round"/>
+              <path class="gseg g-obese"  d="M 216 72 A 110 110 0 0 1 240 130" fill="none" stroke-width="16" stroke-linecap="round"/>
+              <line x1="73"  y1="34" x2="66"  y2="24" stroke="var(--surface)" stroke-width="3"/>
+              <line x1="187" y1="34" x2="194" y2="24" stroke="var(--surface)" stroke-width="3"/>
+              <line x1="216" y1="72" x2="224" y2="65" stroke="var(--surface)" stroke-width="3"/>
+              <line class="gneedle" id="gaugeNeedle" x1="130" y1="130" x2="130" y2="34" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="130" cy="130" r="8"   fill="var(--surface2)" stroke="var(--border2)" stroke-width="2"/>
+              <circle cx="130" cy="130" r="3.5" fill="var(--text)"/>
+            </svg>
+            <div class="gauge-labels">
+              <span style="color:var(--c-under)">Under</span>
+              <span style="color:var(--c-normal)">Normal</span>
+              <span style="color:var(--c-over)">Over</span>
+              <span style="color:var(--c-obese)">Obese</span>
+            </div>
+          </div>
+
+          <!-- Category pill -->
+          <div class="cat-pill" id="categoryBadge">
+            <span class="cat-dot" id="catDot"></span>
+            <span id="categoryText">—</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat">
+              <p class="stat-label">Ideal Weight</p>
+              <p class="stat-val" id="idealRange">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Difference</p>
+              <p class="stat-val" id="weightDiff">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Category</p>
+              <p class="stat-val" id="categoryShort">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Status</p>
+              <p class="stat-val" id="statusText">—</p>
+            </div>
+          </div>
+        </div><!-- /result-body -->
+
+      </div><!-- /step2 -->
+
+    </div><!-- /top-row -->
+
+    <!-- ROW 2: Step 3 — Health Tips (full width below) -->
+    <div class="card tips-card" id="tipsCard">
+
+      <!-- Empty tips state -->
+      <div class="tips-empty" id="tipsEmpty">
+        <p class="tips-empty-text">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Health tips will appear here after you calculate your BMI
+        </p>
       </div>
-    </div>
+
+      <!-- Tips content -->
+      <div class="tips-body" id="tipsContent">
+        <div class="card-header">
+          <span class="card-title">Health Tips</span>
+          <span class="card-badge">Step 3</span>
+        </div>
+        <div class="tips-grid" id="tipsGrid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+    </div><!-- /tips-card -->
+
+    <footer class="footer">
+      BMI is a screening tool, not a diagnostic measure. Consult a healthcare professional for personalised advice.
+    </footer>
 
   </div><!-- /page -->
-
   <script src="app.js"></script>
 </body>
 </html>
